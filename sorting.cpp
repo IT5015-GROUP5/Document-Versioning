@@ -29,4 +29,10 @@ int main()
 	return 0;
 }
 
+void sort(records data[])
+{
+	//option panel
+	//switch case for the chosen option
+}
+
 
