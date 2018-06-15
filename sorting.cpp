@@ -37,8 +37,51 @@ int main()
 
 void sort(records data[])
 {
-	//option panel
-	//switch case for the chosen option
+	char choice;
+	
+	//	Option Panel
+	printf("Sort by\n");
+	printf("1 - Book Number\n");
+	printf("2 - Book Number\n");
+	printf("3 - Book Number\n");
+	printf("4 - Book Number\n");
+	printf("5 - Book Number\n");
+	printf("6 - Book Number\n");
+	printf("7 - Book Number\n\n");
+	printf("Enter your choice: ");
+	scanf("%c", &choice);
+	
+	//	switch case for the chosen option
+}
+
+//	Function for sorting book number in ascending or descending order
+void sortBookNum(records data[], orderType)
+{
+}
+
+//	Function for sorting page number in ascending or descending order
+void sortPageNum(records data[], orderType)
+{
+}
+
+//	Function for sorting book title in ascending or descending order
+void sortTitle(records data[], orderType)
+{
+}
+
+//	Function for sorting ISBN in ascending or descending order
+void sortISBN(records data[], orderType)
+{
+}
+
+//	Function for sorting book content in ascending or descending order
+void sortContents(records data[], orderType)
+{
+}
+
+//	Function for sorting book author in ascending or descending order
+void sortAuthor(records data[], orderType)
+{
 }
 
 
