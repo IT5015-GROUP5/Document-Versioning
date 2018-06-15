@@ -20,7 +20,13 @@ void writeRec(records);
 void sort(records);
 void display(records);
 
-
+//	Prototypes for the sorting method
+void sortBookNum(records, orderType);
+void sortPageNum(records, orderType);
+void sortTitle(records, orderType);
+void sortISBN(records, orderType);
+void sortContents(records, orderType);
+void sortAuthor(records, orderType);
 
 int main()
 {
