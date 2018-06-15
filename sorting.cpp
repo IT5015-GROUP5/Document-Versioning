@@ -35,6 +35,33 @@ int main()
 	return 0;
 }
 
+void readRec(records)
+{
+	int i;
+	FILE * fp;
+    char *filename="library.txt"; 
+	fp = fopen(filename, r);
+	
+	
+}
+
+void writeRec(records)
+{
+	int x;
+	
+	FILE * fp;
+    char *filename="library.txt";
+	
+	printf("Placing in file...");
+	
+	if(sizeof(records) != 0){
+		
+		fp= fopen(filename,"w");
+	}
+	
+	fclose(fp);
+}
+
 void sort(records data[])
 {
 	char choice;
