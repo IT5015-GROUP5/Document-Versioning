@@ -42,8 +42,14 @@ void readRec(records)
     char *filename="library.txt"; 
 	fp = fopen(filename, r);
 
-	for(i=0; i<N; i++)
+	for(i=0; i< (N+2); i++) // the +2 is for the header in the text file
 	{
+		fscanf(fp, "%d", records[i].book_no);
+		fgets(records[i].title, 255, fp);
+		fgets(records[i].author, 255, fp);
+		fgets(records[i].ISBN, 255, fp);
+		fgets(records[i].contents, 255, fp);
+		fscanf(fp, "%d", records[i].page_no);
 		
 	}	
 	
