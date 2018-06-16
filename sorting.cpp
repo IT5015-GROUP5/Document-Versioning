@@ -154,8 +154,13 @@ void sortAuthor(records data[], char orderType)
 void display(records)
 {
 	int i;
-	for(i = 0; i < N; i++){
-		printf("%d - %d - %s - %s - %s - %s\n",records[i].book_no,records[i].page_no,records[i].title,records[i].ISBN,records[i].contents,records[i].author);
+	printf("BOOKS:");
+	for(i = 0; i < N; i++){ //loop through the data
+		printf("Book No: %d",records[i].book_no);
+		printf("Title: %s",records[i].title);
+		printf("Author: %s",records[i].author);
+		printf("ISBN: %s",records[i].ISBN);
+		printf("Page No: %d",records[i].page_no);
+		printf("Content: %s",records[i].contents);
 	}
 }
-
