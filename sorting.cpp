@@ -41,7 +41,11 @@ void readRec(records)
 	FILE * fp;
     char *filename="library.txt"; 
 	fp = fopen(filename, r);
-	
+
+	for(i=0; i<N; i++)
+	{
+		
+	}	
 	
 }
 
@@ -57,6 +61,15 @@ void writeRec(records)
 	if(sizeof(records) != 0){
 		
 		fp= fopen(filename,"w");
+		
+		fprintf(fp, "\n\n%-10s%-30s%15s%15s%15s%20s%15s","Book #","Title","Author", "ISBN", "Contents", "Page #");
+		fprintf(fp, "\n%-10s%-30s%15s%15s%15s%20s%15s","---","---------------","--------","--------", "--------", "--------");
+		fprintf(fp, "\n%-10d", records.book_no);
+		fprintf(fp, "%-30s", records.title);	
+		fprintf(fp, "%15s", records.author);
+		fprintf(fp, "%15s", records.ISBN);
+		fprintf(fp, "%20s", records.contents);
+		fprintf(fp, "%15d", records.page_no);
 	}
 	
 	fclose(fp);
