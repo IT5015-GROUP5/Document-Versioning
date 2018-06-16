@@ -38,7 +38,7 @@ void readRec(records)
 {
 	int i;
 	FILE * fp;
-    char *filename="library.txt"; 
+    	char *filename="library.txt"; 
 	fp = fopen(filename, r);
 
 	for(i=0; i< (N+2); i++) // the +2 is for the header in the text file
@@ -59,7 +59,7 @@ void writeRec(records)
 	int x;
 	
 	FILE * fp;
-    char *filename="library.txt";
+    	char *filename="library.txt";
 	
 	printf("Placing in file...");
 	
@@ -103,8 +103,7 @@ void sort(records data[])
 	scanf("%c", &orderType);	
 	
 	//	switch case for the chosen option
-	switch(choice)
-	{
+	switch(choice) {
 		case '1': 	sortBookNum(data, orderType);
 				break;
 		case '2': 	sortPageNum(data, orderType);
@@ -124,31 +123,169 @@ void sort(records data[])
 //	Function for sorting book number in ascending or descending order
 void sortBookNum(records data[], char orderType)
 {
+	records temp;
+	int i, j;
+	if(orderType == 'A' || orderType == 'a') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(records[i].book_no < records[j].book_no)<0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}else if(orderType == 'B' || orderType == 'b') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].book_no, records[j].book_no)>0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}
 }
 
 //	Function for sorting page number in ascending or descending order
 void sortPageNum(records data[], char orderType)
 {
+	records temp;
+	int i, j;
+	if(orderType == 'A' || orderType == 'a') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(records[i].page_no < records[j].page_no)<0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}else if(orderType == 'B' || orderType == 'b') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].page_no, records[j].page_no)>0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}
 }
 
 //	Function for sorting book title in ascending or descending order
 void sortTitle(records data[], char orderType)
 {
+	records temp;
+	int i, j;
+	if(orderType == 'A' || orderType == 'a') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].title, records[j].title)<0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}else if(orderType == 'B' || orderType == 'b') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].title, records[j].title)>0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}
 }
 
 //	Function for sorting ISBN in ascending or descending order
 void sortISBN(records data[], char orderType)
 {
+	records temp;
+	int i, j;
+	if(orderType == 'A' || orderType == 'a') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].ISBN, records[j].ISBN)<0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}else if(orderType == 'B' || orderType == 'b') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].ISBN, records[j].ISBN)>0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}
 }
 
-//	Function for sorting book content in ascending or descending order
+//	Function for sorting book contents in ascending or descending order
 void sortContents(records data[], char orderType)
 {
+	records temp;
+	int i, j;
+	if(orderType == 'A' || orderType == 'a') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].contents, records[j].contents)<0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}else if(orderType == 'B' || orderType == 'b') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].contents, records[j].contents)>0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}
 }
 
 //	Function for sorting book author in ascending or descending order
 void sortAuthor(records data[], char orderType)
 {
+	records temp;
+	int i, j;
+	if(orderType == 'A' || orderType == 'a') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].author, records[j].author)<0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}else if(orderType == 'B' || orderType == 'b') {
+		for(i=0; i<N; i++) {
+			for(j=i+1; j<N; j++) {
+				if(strcmp(records[i].author, records[j].author)>0) {
+					temp = records[i];
+					records[i] = records[j];
+					records[j] = temp;
+				}
+			}
+		}
+	}
 }
 
 void display(records data)
