@@ -1,4 +1,3 @@
-
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -152,4 +151,11 @@ void sortAuthor(records data[], char orderType)
 {
 }
 
+void display(records)
+{
+	int i;
+	for(i = 0; i < N; i++){
+		printf("%d - %d - %s - %s - %s - %s\n",records[i].book_no,records[i].page_no,records[i].title,records[i].ISBN,records[i].contents,records[i].author);
+	}
+}
 
