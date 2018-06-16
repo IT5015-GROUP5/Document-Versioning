@@ -21,12 +21,12 @@ void sort(records);
 void display(records);
 
 //	Prototypes for the sorting method
-void sortBookNum(records, orderType);
-void sortPageNum(records, orderType);
-void sortTitle(records, orderType);
-void sortISBN(records, orderType);
-void sortContents(records, orderType);
-void sortAuthor(records, orderType);
+void sortBookNum(records, char);
+void sortPageNum(records, char);
+void sortTitle(records, char);
+void sortISBN(records, char);
+void sortContents(records, char);
+void sortAuthor(records, char);
 
 int main()
 {
@@ -83,50 +83,72 @@ void writeRec(records)
 
 void sort(records data[])
 {
-	char choice;
+	char choice, orderType;
 	
 	//	Option Panel
 	printf("Sort by\n");
 	printf("1 - Book Number\n");
-	printf("2 - Book Number\n");
-	printf("3 - Book Number\n");
-	printf("4 - Book Number\n");
-	printf("5 - Book Number\n");
-	printf("6 - Book Number\n");
-	printf("7 - Book Number\n\n");
+	printf("2 - Page Number\n");
+	printf("3 - Book Title\n");
+	printf("4 - ISBN\n");
+	printf("5 - Contents\n");
+	printf("6 - Book Author\n");
+	printf("0 - Book Number\n\n");
 	printf("Enter your choice: ");
 	scanf("%c", &choice);
 	
+	//	Order Option Panel
+	print("\n\n Order by\n");
+	printf("A - Descending Order\n");
+	printf("B - Ascending Order\n");
+	scanf("%c", &orderType);	
+	
 	//	switch case for the chosen option
+	switch(choice)
+	{
+		case '1': 	sortBookNum(data, orderType);
+				break;
+		case '2': 	sortPageNum(data, orderType);
+				break;
+		case '3': 	sortTitle(data, orderType);
+				break;
+		case '4': 	sortISBN(data, orderType);
+				break;
+		case '5': 	sortContents(data, orderType);
+				break;
+		case '6': 	sortAuthor(data, orderType);
+				break;
+		case '0': 	break;
+	}
 }
 
 //	Function for sorting book number in ascending or descending order
-void sortBookNum(records data[], orderType)
+void sortBookNum(records data[], char orderType)
 {
 }
 
 //	Function for sorting page number in ascending or descending order
-void sortPageNum(records data[], orderType)
+void sortPageNum(records data[], char orderType)
 {
 }
 
 //	Function for sorting book title in ascending or descending order
-void sortTitle(records data[], orderType)
+void sortTitle(records data[], char orderType)
 {
 }
 
 //	Function for sorting ISBN in ascending or descending order
-void sortISBN(records data[], orderType)
+void sortISBN(records data[], char orderType)
 {
 }
 
 //	Function for sorting book content in ascending or descending order
-void sortContents(records data[], orderType)
+void sortContents(records data[], char orderType)
 {
 }
 
 //	Function for sorting book author in ascending or descending order
-void sortAuthor(records data[], orderType)
+void sortAuthor(records data[], char orderType)
 {
 }
 
