@@ -61,21 +61,22 @@ void writeRec(records bookRecs)
 	int x;
 	
 	FILE * fp;
-	
+	int i;
 	printf("Placing in file...");
 	
 	if(sizeof(records) != 0){
 		
 		fp= fopen("library.txt","w");
-		
-		fprintf(fp, "\n\n%-10s%-30s%15s%15s%15s%20s%15s","Book #","Title","Author", "ISBN", "Contents", "Page #");
-		fprintf(fp, "\n%-10s%-30s%15s%15s%15s%20s%15s","---","---------------","--------","--------", "--------", "--------");
-		fprintf(fp, "\n%-10d", bookRecs.book_no);
-		fprintf(fp, "%-30s", bookRecs.title);	
-		fprintf(fp, "%15s", bookRecs.author);
-		fprintf(fp, "%15s", bookRecs.ISBN);
-		fprintf(fp, "%20s", bookRecs.contents);
-		fprintf(fp, "%15d", bookRecs.page_no);
+		for(i=0; i < N+2; i++) {
+			fprintf(fp, "\n\n%-10s%-30s%15s%15s%15s%20s%15s","Book #","Title","Author", "ISBN", "Contents", "Page #");
+			fprintf(fp, "\n%-10s%-30s%15s%15s%15s%20s%15s","---","---------------","--------","--------", "--------", "--------");
+			fprintf(fp, "\n%-10d", bookRecs[i].book_no);
+			fprintf(fp, "%-30s", bookRecs[i].title);	
+			fprintf(fp, "%15s", bookRecs[i].author);
+			fprintf(fp, "%15s", bookRecs[i].ISBN);
+			fprintf(fp, "%20s", bookRecs[i].contents);
+			fprintf(fp, "%15d", bookRecs[i].page_no);
+		}
 	}
 	
 	fclose(fp);
