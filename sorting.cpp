@@ -44,7 +44,7 @@ void readRec(records bookRecs)
 		for(i=0, j=0; i< N+2; i++) // the +2 is for the header in the text file
 		{
 			if(i==2){
-				fscanf(fp, "%d %s %s %s %s. %d", &(bookRecs[j].book_no), bookRecs[j].title, bookRecs[j].author, bookRecs[j].ISBN, bookRecs[j].contents, bookRecs[j].page_no);
+				fscanf(fp, "%d %s %s %s %s %d", &(bookRecs[j].book_no), bookRecs[j].title, bookRecs[j].author, bookRecs[j].ISBN, bookRecs[j].contents, bookRecs[j].page_no);
 				j++;
 			}
 			
@@ -86,40 +86,47 @@ void sort(records data[])
 {
 	char choice, orderType;
 	
-	//	Option Panel
-	printf("Sort by\n");
-	printf("1 - Book Number\n");
-	printf("2 - Page Number\n");
-	printf("3 - Book Title\n");
-	printf("4 - ISBN\n");
-	printf("5 - Contents\n");
-	printf("6 - Book Author\n");
-	printf("0 - Book Number\n\n");
-	printf("Enter your choice: ");
-	scanf("%c", &choice);
-	
-	//	Order Option Panel
-	print("\n\n Order by\n");
-	printf("A - Descending Order\n");
-	printf("B - Ascending Order\n");
-	scanf("%c", &orderType);	
-	
-	//	switch case for the chosen option
-	switch(choice) {
-		case '1': 	sortBookNum(data, orderType);
-				break;
-		case '2': 	sortPageNum(data, orderType);
-				break;
-		case '3': 	sortTitle(data, orderType);
-				break;
-		case '4': 	sortISBN(data, orderType);
-				break;
-		case '5': 	sortContents(data, orderType);
-				break;
-		case '6': 	sortAuthor(data, orderType);
-				break;
-		case '0': 	break;
-	}
+	do {
+		//	Option Panel
+		printf("Sort by\n");
+		printf("1 - Book Number\n");
+		printf("2 - Page Number\n");
+		printf("3 - Book Title\n");
+		printf("4 - ISBN\n");
+		printf("5 - Contents\n");
+		printf("6 - Book Author\n");
+		printf("X - Exit\n\n");
+		printf("Enter your choice: ");
+		scanf("%c", &choice);
+
+		if (choice != 'X' || choice != 'x') {
+			//	Order Option Panel
+			do {
+				print("\n\n Order by\n");
+				printf("A - Descending Order\n");
+				printf("B - Ascending Order\n");
+				printf("X - Exit\n\n");
+				printf("Enter what order: ");
+				scanf("%c", &orderType);
+			} while (orderType != 'A' && orderType != 'a'  && orderType != 'B' && orderType != 'b');
+		}	
+
+		//	switch case for the chosen option
+		switch(choice) {
+			case '1': 	sortBookNum(data, orderType);
+					break;
+			case '2': 	sortPageNum(data, orderType);
+					break;
+			case '3': 	sortTitle(data, orderType);
+					break;
+			case '4': 	sortISBN(data, orderType);
+					break;
+			case '5': 	sortContents(data, orderType);
+					break;
+			case '6': 	sortAuthor(data, orderType);
+					break;
+		}
+	} while (choice != 'X' && choice != 'x');
 }
 
 //	Function for sorting book number in ascending or descending order
@@ -130,7 +137,7 @@ void sortBookNum(records data[], char orderType)
 	if(orderType == 'A' || orderType == 'a') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(records[i].book_no < records[j].book_no)<0) {
+				if(records[i].book_no < records[j].book_no) {
 					temp = records[i];
 					records[i] = records[j];
 					records[j] = temp;
@@ -140,7 +147,7 @@ void sortBookNum(records data[], char orderType)
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].book_no, records[j].book_no)>0) {
+				if(records[i].book_no > records[j].book_no) {
 					temp = records[i];
 					records[i] = records[j];
 					records[j] = temp;
@@ -158,7 +165,7 @@ void sortPageNum(records data[], char orderType)
 	if(orderType == 'A' || orderType == 'a') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(records[i].page_no < records[j].page_no)<0) {
+				if(records[i].page_no < records[j].page_no) {
 					temp = records[i];
 					records[i] = records[j];
 					records[j] = temp;
@@ -168,7 +175,7 @@ void sortPageNum(records data[], char orderType)
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].page_no, records[j].page_no)>0) {
+				if(records[i].page_no > records[j].page_no) {
 					temp = records[i];
 					records[i] = records[j];
 					records[j] = temp;
