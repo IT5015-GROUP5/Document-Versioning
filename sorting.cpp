@@ -44,7 +44,7 @@ void readRec(records bookRecs)
 		for(i=0, j=0; i< N+2; i++) // the +2 is for the header in the text file
 		{
 			if(i==2){
-				fscanf(fp, "%d %s %s %s %s %d", &(bookRecs[j].book_no), bookRecs[j].title, bookRecs[j].author, bookRecs[j].ISBN, bookRecs[j].contents, bookRecs[j].page_no);
+				fscanf(fp, "%d %s %s %s %s. %d", &(bookRecs[j].book_no), bookRecs[j].title, bookRecs[j].author, bookRecs[j].ISBN, bookRecs[j].contents, bookRecs[j].page_no);
 				j++;
 			}
 			
