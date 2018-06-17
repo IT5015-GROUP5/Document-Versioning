@@ -91,40 +91,53 @@ void sort(records data)
 {
 	char choice, orderType;
 	
-	//	Option Panel
-	printf("Sort by\n");
-	printf("1 - Book Number\n");
-	printf("2 - Page Number\n");
-	printf("3 - Book Title\n");
-	printf("4 - ISBN\n");
-	printf("5 - Contents\n");
-	printf("6 - Book Author\n");
-	printf("0 - Book Number\n\n");
-	printf("Enter your choice: ");
-	scanf("%c", &choice);
-	
-	//	Order Option Panel
-	printf("\n\n Order by\n");
-	printf("A - Descending Order\n");
-	printf("B - Ascending Order\n");
-	scanf("%c", &orderType);	
-	
-	//	switch case for the chosen option
-	switch(choice) {
-		case '1': 	sortBookNum(data, orderType);
-				break;
-		case '2': 	sortPageNum(data, orderType);
-				break;
-		case '3': 	sortTitle(data, orderType);
-				break;
-		case '4': 	sortISBN(data, orderType);
-				break;
-		case '5': 	sortContents(data, orderType);
-				break;
-		case '6': 	sortAuthor(data, orderType);
-				break;
-		case '0': 	break;
-	}
+	do {
+		//	Option Panel
+		printf("Sort by\n");
+		printf("A - Book Number\n");
+		printf("B - Page Number\n");
+		printf("C - Book Title\n");
+		printf("D - ISBN\n");
+		printf("E - Contents\n");
+		printf("F - Book Author\n");
+		printf("X - Exit\n\n");
+		printf("Enter your choice: ");
+		scanf("%c", &choice);
+
+		if (choice != 'X' || choice != 'x') {
+			//	Order Option Panel
+			do {
+				print("\n\n Order by\n");
+				printf("A - Descending Order\n");
+				printf("B - Ascending Order\n");
+				printf("X - Exit\n\n");
+				printf("Enter what order: ");
+				scanf("%c", &orderType);
+			} while (orderType != 'A' && orderType != 'a'  && orderType != 'B' && orderType != 'b');
+		}	
+
+		//	switch case for the chosen option
+		switch(choice) {
+			case 'A':
+			case 'a':	sortBookNum(data, orderType);
+					break;
+			case 'B': 
+			case 'b':	sortPageNum(data, orderType);
+					break;
+			case 'C':
+			case 'c':	sortTitle(data, orderType);
+					break;
+			case 'D':
+			case 'd':	sortISBN(data, orderType);
+					break;
+			case 'E':
+			case 'e':	sortContents(data, orderType);
+					break;
+			case 'F':
+			case 'f':	sortAuthor(data, orderType);
+					break;
+		}
+	} while (choice != 'X' && choice != 'x');
 }
 
 //	Function for sorting book number in ascending or descending order
@@ -135,7 +148,7 @@ void sortBookNum(records data, char orderType)
 	if(orderType == 'A' || orderType == 'a') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if((data[i].book_no < data[j].book_no)<0) {
+				if(data[i].book_no < data[j].book_no) {
 					temp = data[i];
 					data[i] = data[j];
 					data[j] = temp;
