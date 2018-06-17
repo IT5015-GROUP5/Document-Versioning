@@ -30,13 +30,15 @@ void sortAuthor(records, char);
 int main()
 {
 	records book_record;
+	readRec(book_record);
+	display(book_record);
 
 	return 0;
 }
 
 void readRec(records R)
 {
-	int i;
+	int i, j;
 	FILE * fp;
     char filename[15]="library.txt"; 
 	fp = fopen(filename, "r");
@@ -69,11 +71,6 @@ void writeRec(records R)
     	char filename[15]="library.txt";
 	
 	printf("Placing in file...");
-	
-	for(i = 0 ; i <N ; i++){
-		fprintf(fp, "%d %s %s %d %d %d %d %.2f \n", s[i].id_no, s[i].fname, s[i].lname, s[i].q1, s[i].q2, s[i].q3, s[i].q4, s[i].ave);
-	}
-	printf("Process Completed...\n");
 	
 	if(sizeof(records) != 0){
 		
