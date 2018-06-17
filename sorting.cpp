@@ -38,7 +38,7 @@ void readRec(records R)
 {
 	int i;
 	FILE * fp;
-    char filename[16]="library.txt"; 
+    char filename[15]="library.txt"; 
 	fp = fopen(filename, "r");
 
 	if(fp!=NULL){
@@ -63,19 +63,22 @@ void readRec(records R)
 
 void writeRec(records R)
 {
-	int x;
+	int i;
 	
 	FILE * fp;
     	char filename[15]="library.txt";
 	
 	printf("Placing in file...");
 	
+	for(i = 0 ; i <N ; i++){
+		fprintf(fp, "%d %s %s %d %d %d %d %.2f \n", s[i].id_no, s[i].fname, s[i].lname, s[i].q1, s[i].q2, s[i].q3, s[i].q4, s[i].ave);
+	}
+	printf("Process Completed...\n");
+	
 	if(sizeof(records) != 0){
 		
 		fp= fopen(filename,"w");
 		
-		fprintf(fp, "\n\n%-10s%-30s%15s%15s%15s%20s%15s","Book #","Title","Author", "ISBN", "Contents", "Page #");
-		fprintf(fp, "\n%-10s%-30s%15s%15s%15s%20s%15s","---","---------------","--------","--------", "--------", "--------");
 		fprintf(fp, "\n%-10d", R[0].book_no);
 		fprintf(fp, "%-30s", R[0].title);	
 		fprintf(fp, "%15s", R[0].author);
