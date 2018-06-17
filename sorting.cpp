@@ -38,18 +38,25 @@ void readRec(records R)
 {
 	int i;
 	FILE * fp;
-    	char filename[16]="library.txt"; 
+    char filename[16]="library.txt"; 
 	fp = fopen(filename, "r");
 
-	for(i=0; i< (N+2); i++) // the +2 is for the header in the text file
-	{
-		fscanf(fp, "%d", R[i].book_no);
-		fgets(R[i].title, 255, fp);
-		fgets(R[i].author, 255, fp);
-		fgets(R[i].ISBN, 255, fp);
-		fgets(R[i].contents, 255, fp);
-		fscanf(fp, "%d", R[i].page_no);
-		
+	if(fp!=NULL){
+		for(i=0, j=0; i< N+2; i++) // the +2 is for the header in the text file
+		{
+			if(i == 2){
+				fscanf(fp, "%d", &(R[j].book_no));
+				fscanf(fp, "%d", &(R[j].page_no));
+				fgets(R[j].title, 25, fp);
+				fgets(R[j].ISBN, 11, fp);
+				fscanf(fp, "%s.", R[j].contents);
+				fscanf(fp, "%s", R[j].author);
+				j++;
+			}
+			
+		}	
+	}else{
+		printf("Error in reading file.");
 	}	
 	
 }
