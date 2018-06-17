@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <conio.h>
 #define N 20
 
 //	Structure
@@ -29,66 +30,53 @@ void sortAuthor(records, char);
 
 int main()
 {
+	printf("\t\t\t\tWELCOME TO E-LIBRARY!!!\n");
 	records book_record;
 	readRec(book_record);
-	display(book_record);
-
+	sort(book_record);
+	
 	return 0;
 }
 
 void readRec(records R)
 {
-	int i, j;
-	FILE * fp;
+	int i;
+	FILE *fp;
     char filename[15]="library.txt"; 
 	fp = fopen(filename, "r");
-
+	
+	printf("Reading File...\n\n");
 	if(fp!=NULL){
-		for(i=0, j=0; i< N+2; i++) // the +2 is for the header in the text file
+		for(i=0; i<N; i++) 
 		{
-			if(i == 2){
-				fscanf(fp, "%d", &(R[j].book_no));
-				fscanf(fp, "%d", &(R[j].page_no));
-				fgets(R[j].title, 25, fp);
-				fgets(R[j].ISBN, 11, fp);
-				fscanf(fp, "%s.", R[j].contents);
-				fscanf(fp, "%s", R[j].author);
-				j++;
-			}
-			
+			fscanf(fp, "%d %d %s %s %s %s", &(R[i].book_no), &(R[i].page_no), R[i].title, R[i].ISBN, R[i].contents, R[i].author);
 		}	
 	}else{
 		printf("Error in reading file.");
-	}	
+	}
+	printf("Reading Success...\n\n");
 	
+	fclose(fp);
 }
 
 void writeRec(records R)
 {
 	int i;
-	
 	FILE * fp;
-    	char filename[15]="library.txt";
+    char filename[15]="library.txt";
+    fp = fopen(filename, "w");
 	
-	printf("Placing in file...");
-	
-	if(sizeof(records) != 0){
-		
-		fp= fopen(filename,"w");
-		
-		fprintf(fp, "\n%-10d", R[0].book_no);
-		fprintf(fp, "%-30s", R[0].title);	
-		fprintf(fp, "%15s", R[0].author);
-		fprintf(fp, "%15s", R[0].ISBN);
-		fprintf(fp, "%20s", R[0].contents);
-		fprintf(fp, "%15d", R[0].page_no);
+	printf("Placing in file...\n");
+	for(i=0; i<N; i++){
+		fprintf(fp, "%d %d %s %s %s %s \n", R[i].book_no, R[i].page_no, R[i].title, R[i].ISBN, R[i].contents, R[i].author);
 	}
+	printf("Process Completed...\n");
 	
 	fclose(fp);
 }
 
 void sort(records data)
-{
+{	
 	char choice, orderType;
 	
 	do {
@@ -102,18 +90,19 @@ void sort(records data)
 		printf("F - Book Author\n");
 		printf("X - Exit\n\n");
 		printf("Enter your choice: ");
+		_flushall();
 		scanf("%c", &choice);
-
-		if (choice != 'X' || choice != 'x') {
+		if (choice != 'X' && choice != 'x') {
 			//	Order Option Panel
 			do {
-				print("\n\n Order by\n");
+				_flushall();
+				printf("\n\n Order by\n");
 				printf("A - Descending Order\n");
 				printf("B - Ascending Order\n");
 				printf("X - Exit\n\n");
 				printf("Enter what order: ");
 				scanf("%c", &orderType);
-			} while (orderType != 'A' && orderType != 'a'  && orderType != 'B' && orderType != 'b');
+			} while (orderType != 'A' && orderType != 'a'  &&  orderType != 'B' && orderType != 'b' && orderType != 'X' && orderType != 'x');
 		}	
 
 		//	switch case for the chosen option
@@ -137,7 +126,13 @@ void sort(records data)
 			case 'f':	sortAuthor(data, orderType);
 					break;
 		}
+		if (choice != 'X' && choice != 'x') {
+			display(data);
+			writeRec(data);
+		}
+		
 	} while (choice != 'X' && choice != 'x');
+	
 }
 
 //	Function for sorting book number in ascending or descending order
@@ -311,7 +306,7 @@ void sortAuthor(records data, char orderType)
 void display(records data)
 {
 	int i;
-	printf("BOOKS:\n");
+	printf("BOOKS:\n\n");
 	for(i = 0; i < N; i++){ //loop through the data
 		printf("Book No: %d\n",data[i].book_no);
 		printf("Title: %s\n",data[i].title);
