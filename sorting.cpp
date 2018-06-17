@@ -145,7 +145,7 @@ void sortBookNum(records data, char orderType)
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(data[i].book_no < data[j].book_no) {
+				if(data[i].book_no > data[j].book_no) {
 					temp = data[i];
 					data[i] = data[j];
 					data[j] = temp;
@@ -173,7 +173,7 @@ void sortPageNum(records data, char orderType)
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(data[i].page_no < data[j].page_no) {
+				if(data[i].page_no > data[j].page_no) {
 					temp = data[i];
 					data[i] = data[j];
 					data[j] = temp;
