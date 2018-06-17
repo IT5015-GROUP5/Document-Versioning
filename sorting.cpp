@@ -34,32 +34,32 @@ int main()
 	return 0;
 }
 
-void readRec(records)
+void readRec(records R)
 {
 	int i;
 	FILE * fp;
-    	char *filename="library.txt"; 
-	fp = fopen(filename, r);
+    	char filename[16]="library.txt"; 
+	fp = fopen(filename, "r");
 
 	for(i=0; i< (N+2); i++) // the +2 is for the header in the text file
 	{
-		fscanf(fp, "%d", records[i].book_no);
-		fgets(records[i].title, 255, fp);
-		fgets(records[i].author, 255, fp);
-		fgets(records[i].ISBN, 255, fp);
-		fgets(records[i].contents, 255, fp);
-		fscanf(fp, "%d", records[i].page_no);
+		fscanf(fp, "%d", R[i].book_no);
+		fgets(R[i].title, 255, fp);
+		fgets(R[i].author, 255, fp);
+		fgets(R[i].ISBN, 255, fp);
+		fgets(R[i].contents, 255, fp);
+		fscanf(fp, "%d", R[i].page_no);
 		
 	}	
 	
 }
 
-void writeRec(records)
+void writeRec(records R)
 {
 	int x;
 	
 	FILE * fp;
-    	char *filename="library.txt";
+    	char filename[15]="library.txt";
 	
 	printf("Placing in file...");
 	
@@ -69,18 +69,18 @@ void writeRec(records)
 		
 		fprintf(fp, "\n\n%-10s%-30s%15s%15s%15s%20s%15s","Book #","Title","Author", "ISBN", "Contents", "Page #");
 		fprintf(fp, "\n%-10s%-30s%15s%15s%15s%20s%15s","---","---------------","--------","--------", "--------", "--------");
-		fprintf(fp, "\n%-10d", records.book_no);
-		fprintf(fp, "%-30s", records.title);	
-		fprintf(fp, "%15s", records.author);
-		fprintf(fp, "%15s", records.ISBN);
-		fprintf(fp, "%20s", records.contents);
-		fprintf(fp, "%15d", records.page_no);
+		fprintf(fp, "\n%-10d", R[0].book_no);
+		fprintf(fp, "%-30s", R[0].title);	
+		fprintf(fp, "%15s", R[0].author);
+		fprintf(fp, "%15s", R[0].ISBN);
+		fprintf(fp, "%20s", R[0].contents);
+		fprintf(fp, "%15d", R[0].page_no);
 	}
 	
 	fclose(fp);
 }
 
-void sort(records data[])
+void sort(records data)
 {
 	char choice, orderType;
 	
@@ -97,7 +97,7 @@ void sort(records data[])
 	scanf("%c", &choice);
 	
 	//	Order Option Panel
-	print("\n\n Order by\n");
+	printf("\n\n Order by\n");
 	printf("A - Descending Order\n");
 	printf("B - Ascending Order\n");
 	scanf("%c", &orderType);	
@@ -121,27 +121,27 @@ void sort(records data[])
 }
 
 //	Function for sorting book number in ascending or descending order
-void sortBookNum(records data[], char orderType)
+void sortBookNum(records data, char orderType)
 {
-	records temp;
+	struct node temp;
 	int i, j;
 	if(orderType == 'A' || orderType == 'a') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(records[i].book_no < records[j].book_no)<0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if((data[i].book_no < data[j].book_no)<0) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].book_no, records[j].book_no)>0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(data[i].book_no < data[j].book_no) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
@@ -149,27 +149,27 @@ void sortBookNum(records data[], char orderType)
 }
 
 //	Function for sorting page number in ascending or descending order
-void sortPageNum(records data[], char orderType)
+void sortPageNum(records data, char orderType)
 {
-	records temp;
+	struct node temp;
 	int i, j;
 	if(orderType == 'A' || orderType == 'a') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(records[i].page_no < records[j].page_no)<0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(data[i].page_no < data[j].page_no) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].page_no, records[j].page_no)>0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(data[i].page_no < data[j].page_no) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
@@ -177,27 +177,27 @@ void sortPageNum(records data[], char orderType)
 }
 
 //	Function for sorting book title in ascending or descending order
-void sortTitle(records data[], char orderType)
+void sortTitle(records data, char orderType)
 {
-	records temp;
+	struct node temp;
 	int i, j;
 	if(orderType == 'A' || orderType == 'a') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].title, records[j].title)<0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(strcmp(data[i].title, data[j].title)<0) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].title, records[j].title)>0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(strcmp(data[i].title, data[j].title)>0) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
@@ -205,27 +205,27 @@ void sortTitle(records data[], char orderType)
 }
 
 //	Function for sorting ISBN in ascending or descending order
-void sortISBN(records data[], char orderType)
+void sortISBN(records data, char orderType)
 {
-	records temp;
+	struct node temp;
 	int i, j;
 	if(orderType == 'A' || orderType == 'a') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].ISBN, records[j].ISBN)<0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(strcmp(data[i].ISBN, data[j].ISBN)<0) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].ISBN, records[j].ISBN)>0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(strcmp(data[i].ISBN, data[j].ISBN)>0) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
@@ -233,27 +233,27 @@ void sortISBN(records data[], char orderType)
 }
 
 //	Function for sorting book contents in ascending or descending order
-void sortContents(records data[], char orderType)
+void sortContents(records data, char orderType)
 {
-	records temp;
+	struct node temp;
 	int i, j;
 	if(orderType == 'A' || orderType == 'a') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].contents, records[j].contents)<0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(strcmp(data[i].contents, data[j].contents)<0) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].contents, records[j].contents)>0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(strcmp(data[i].contents, data[j].contents)>0) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
@@ -261,27 +261,27 @@ void sortContents(records data[], char orderType)
 }
 
 //	Function for sorting book author in ascending or descending order
-void sortAuthor(records data[], char orderType)
+void sortAuthor(records data, char orderType)
 {
-	records temp;
+	struct node temp;
 	int i, j;
 	if(orderType == 'A' || orderType == 'a') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].author, records[j].author)<0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(strcmp(data[i].author, data[j].author)<0) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
 	}else if(orderType == 'B' || orderType == 'b') {
 		for(i=0; i<N; i++) {
 			for(j=i+1; j<N; j++) {
-				if(strcmp(records[i].author, records[j].author)>0) {
-					temp = records[i];
-					records[i] = records[j];
-					records[j] = temp;
+				if(strcmp(data[i].author, data[j].author)>0) {
+					temp = data[i];
+					data[i] = data[j];
+					data[j] = temp;
 				}
 			}
 		}
